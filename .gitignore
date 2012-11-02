@@ -1,0 +1,10 @@
+.idea/
+.settings/
+nbproject/
+assets/
+static/
+temp/
+android/
+*.ipa
+*.apk
+*.log
