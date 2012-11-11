@@ -51,12 +51,19 @@ class DB {
    */
   public function getVar($sql) {
     $result = $this->pdo->query($sql);
-    $result->setFetchMode(PDO::FETCH_NUM);
-    $row = $result->fetch();
-    return $row[0];
+    if ($result) {
+      return $result->fetchColumn();
+    } else {
+      return false;
+    }
   }
   public function getRow($sql) {
-    
+    $result = $this->pdo->query($sql);
+    if ($result) {
+      return $result->fetchObject();
+    } else {
+      return false;
+    }
   }
   /**
    * 取一批值
@@ -65,15 +72,13 @@ class DB {
    * @return {array} 数组
    */
   public function getResults($sql, $type = 'O') {
-    $result = array();
-    $data = $this->pdo->query($sql);
-    if ($data) {
-      $data->setFetchMode(PDO::FETCH_ASSOC);
-      while($row = $data->fetch()) {
-        $result[] = $row;
-      }
+    $result = $this->pdo->query($sql);
+    if ($result) {
+      $type = $type == 'O' ? PDO::FETCH_ASSOC : PDO::FETCH_NUM;
+      return $result->fetchAll($type);
+    } else {
+      return FALSE;
     }
-    return $result;
   }
   /**
    * 取最近插入的数据的id
