@@ -18,6 +18,7 @@ $bookid = isset($_REQUEST['bookid']) ? (int)$_REQUEST['bookid'] : 0;
 if ($api == '') {
   throwError();
 }
+$api .= '.php';
 
 // 权限校验
 if ($openid && $bookid && $bookid != 0) {
@@ -30,5 +31,10 @@ if ($openid && $bookid && $bookid != 0) {
   }
 }
 
-include_once($api . '.php');
+if (file_exists($api)) {
+  include_once($api);
+} else {
+  echo '{code: 0}';
+}
+
 ?>
