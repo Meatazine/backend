@@ -25,7 +25,7 @@ function createNewBook($uid, $name, $data, $date) {
   if ($bookid) {
     $dir = '../export/' . $bookid;
     if (!is_dir($dir)) {
-      mkdir($dir);
+      mkdir($dir, 0777, true);
     }
   }
   return $bookid;
