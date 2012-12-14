@@ -8,3 +8,4 @@ android/
 *.ipa
 *.apk
 *.log
+include/pdo_connect.php
