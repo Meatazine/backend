@@ -9,3 +9,6 @@ android/
 *.apk
 *.log
 include/pdo_connect.php
+include/Mustache
+
+key
