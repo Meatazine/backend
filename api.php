@@ -8,12 +8,12 @@ if (!$_REQUEST) {
   die('ok');
 }
 
-include('include/error.php');
-include('include/pdo_connect.php');
+include('inc/error.php');
+$DB = include('inc/pdo.php');
 
 $api = $_REQUEST['api'];
 $openid = mysql_escape_string($_REQUEST['openid']);
-$bookid = isset($_REQUEST['bookid']) ? (int)$_REQUEST['bookid'] : 0;
+$bookid = isset($_REQUEST['bookid']) ? (int) $_REQUEST['bookid'] : 0;
 
 if ($api == '') {
   throwError();
@@ -25,7 +25,7 @@ if ($openid && $bookid && $bookid != 0) {
   $sql = "SELECT 'x'
           FROM m_book LEFT JOIN m_user ON m_user.id=m_book.owner
           WHERE m_book.id=$bookid AND m_user.qq='$openid'";
-  $check = $DB->query($sql);
+  $check = $DB->query($sql)->fetchColumn();
   if (!$check) {
     throwError('auth');
   }
@@ -36,5 +36,4 @@ if (file_exists($api)) {
 } else {
   echo '{code: 0}';
 }
-
 ?>

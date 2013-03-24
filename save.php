@@ -3,7 +3,7 @@
  * 保存杂志
  * @author Meathill (meathill@foxmail.com)
  */
-require_once('include/functions.php');
+require_once('inc/functions.php');
 
 $name = mysql_escape_string($_REQUEST['name']);
 $data = mysql_escape_string($_REQUEST['data']);
@@ -15,7 +15,7 @@ if ($bookid == 0) {
   $sql = "SELECT id
           FROM m_user
           WHERE qq='$openid'";
-  $uid = $DB->getVar($sql);
+  $uid = $DB->query($sql)->fetchColumn();
   if (!$uid) {
     throwError();
   }

@@ -15,14 +15,14 @@ $sql = "SELECT id
         FROM m_user
         WHERE qq='$openid'
         LIMIT 1";
-$uid = $DB->getVar($sql);
+$uid = $DB->query($sql)->fetchColumn();
 
 if ($uid) {
   $sql = "SELECT id, title AS name, edit_time AS datetime
           FROM m_book
           WHERE owner=$uid
           ORDER BY edit_time DESC";
-  $data = $DB->getResults($sql);
+  $data = $DB->query($sql)->fetchAll(PDO::FETCH_ASSOC);
   die(json_encode($data));
 }
 

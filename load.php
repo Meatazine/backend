@@ -10,7 +10,7 @@ if (!$bookid) {
 $sql = "SELECT content
         FROM m_book
         WHERE id=$bookid";
-$content = $DB->getVar($sql);
+$content = $DB->query($sql)->fetchColumn();
 if ($check) {
   $result = array('code' => '0', 'data' => $content);
 } else {

@@ -8,7 +8,7 @@ android/
 *.ipa
 *.apk
 *.log
-include/pdo_connect.php
+include/pdo.php
 include/Mustache
 
 key
